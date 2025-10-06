@@ -124,6 +124,7 @@
     </style>
 </head>
 <body class="bg-white overflow-x-hidden">
+    <!---Navbar Imported-->
     <x-navbar />
 
     <!-- Hero Section -->
