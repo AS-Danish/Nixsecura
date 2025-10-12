@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - CyberShield Institute</title>
+    <title>CyberShield Admin Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -85,6 +85,7 @@
             border-radius: 9999px;
             font-size: 0.75rem;
             font-weight: 600;
+            display: inline-block;
         }
 
         .badge-success {
@@ -109,7 +110,101 @@
     </style>
 </head>
 <body class="bg-gray-50">
-    <x-sidebar/>
+    <!-- Sidebar -->
+    <aside id="sidebar" class="fixed left-0 top-0 h-screen w-64 gradient-blue shadow-2xl transition-transform duration-300 z-50 overflow-y-auto">
+        <div class="p-6">
+            <div class="flex items-center justify-between mb-8">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-black text-white">CyberShield</h2>
+                </div>
+                <button id="sidebarClose" class="lg:hidden text-white hover:bg-white hover:bg-opacity-20 p-2 rounded-lg transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <nav class="space-y-2">
+                <a href="#" class="sidebar-link active" data-section="dashboard">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                    </svg>
+                    <span>Dashboard</span>
+                </a>
+                
+                <a href="#" class="sidebar-link" data-section="courses">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                    </svg>
+                    <span>Courses</span>
+                </a>
+                
+                <a href="#" class="sidebar-link" data-section="blogs">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
+                    </svg>
+                    <span>Blogs</span>
+                </a>
+                
+                <a href="#" class="sidebar-link" data-section="certificates">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                    </svg>
+                    <span>Certificates</span>
+                </a>
+                
+                <a href="#" class="sidebar-link" data-section="gallery">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    <span>Gallery</span>
+                </a>
+                
+                <a href="#" class="sidebar-link" data-section="workshops">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    <span>Workshops</span>
+                </a>
+                
+                <a href="#" class="sidebar-link" data-section="reviews">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+                    </svg>
+                    <span>Reviews</span>
+                </a>
+                
+                <a href="#" class="sidebar-link" data-section="contacts">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                    <span>Contacts</span>
+                </a>
+                
+                <a href="#" class="sidebar-link" data-section="settings">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    <span>Settings</span>
+                </a>
+            </nav>
+            
+            <div class="mt-8 pt-6 border-t border-white border-opacity-20">
+                <button class="sidebar-link w-full text-left hover:bg-red-500 hover:bg-opacity-20">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                    </svg>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </div>
+    </aside>
 
     <!-- Main Content -->
     <div class="lg:ml-64">
@@ -135,11 +230,11 @@
                     
                     <div class="hidden md:flex items-center space-x-3 pl-4 border-l border-gray-200">
                         <div class="w-10 h-10 gradient-blue rounded-full flex items-center justify-center">
-                            <span class="text-white font-bold text-sm">A</span>
+                            <span class="text-white font-bold text-sm">AD</span>
                         </div>
                         <div>
                             <p class="text-sm font-bold text-gray-800">Admin User</p>
-                            <p class="text-xs text-gray-500">Administrator</p>
+                            <p class="text-xs text-gray-500">admin@cybershield.com</p>
                         </div>
                     </div>
                 </div>
@@ -210,7 +305,7 @@
                     <div class="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
                         <h3 class="text-xl font-black text-gray-800 mb-6">Recent Enrollments</h3>
                         <div class="space-y-4">
-                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition">
                                 <div class="flex items-center space-x-3">
                                     <div class="w-10 h-10 gradient-blue rounded-full flex items-center justify-center text-white font-bold">RK</div>
                                     <div>
@@ -220,7 +315,7 @@
                                 </div>
                                 <span class="text-xs text-gray-500">2 hours ago</span>
                             </div>
-                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition">
                                 <div class="flex items-center space-x-3">
                                     <div class="w-10 h-10 gradient-blue rounded-full flex items-center justify-center text-white font-bold">PS</div>
                                     <div>
@@ -230,7 +325,7 @@
                                 </div>
                                 <span class="text-xs text-gray-500">5 hours ago</span>
                             </div>
-                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition">
                                 <div class="flex items-center space-x-3">
                                     <div class="w-10 h-10 gradient-blue rounded-full flex items-center justify-center text-white font-bold">AV</div>
                                     <div>
@@ -496,71 +591,13 @@
                         <span>Issue Certificate</span>
                     </button>
                 </div>
-
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden border-2 border-gray-100">
-                    <div class="overflow-x-auto">
-                        <table class="w-full">
-                            <thead class="bg-gray-50 border-b-2 border-gray-200">
-                                <tr>
-                                    <th class="px-6 py-4 text-left text-xs font-black text-gray-600 uppercase tracking-wider">Student Name</th>
-                                    <th class="px-6 py-4 text-left text-xs font-black text-gray-600 uppercase tracking-wider">Course</th>
-                                    <th class="px-6 py-4 text-left text-xs font-black text-gray-600 uppercase tracking-wider">Certificate Type</th>
-                                    <th class="px-6 py-4 text-left text-xs font-black text-gray-600 uppercase tracking-wider">Issue Date</th>
-                                    <th class="px-6 py-4 text-left text-xs font-black text-gray-600 uppercase tracking-wider">Certificate ID</th>
-                                    <th class="px-6 py-4 text-left text-xs font-black text-gray-600 uppercase tracking-wider">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-200">
-                                <tr class="table-row">
-                                    <td class="px-6 py-4 font-bold text-gray-800">Rahul Mehta</td>
-                                    <td class="px-6 py-4 text-gray-600">Ethical Hacking Fundamentals</td>
-                                    <td class="px-6 py-4">
-                                        <span class="badge badge-info">Professional</span>
-                                    </td>
-                                    <td class="px-6 py-4 text-gray-600">Oct 1, 2025</td>
-                                    <td class="px-6 py-4 text-gray-600 font-mono text-sm">CS-2025-001234</td>
-                                    <td class="px-6 py-4">
-                                        <div class="flex space-x-2">
-                                            <button class="text-blue-600 hover:text-blue-800 p-2" title="View">
-                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                                                </svg>
-                                            </button>
-                                            <button class="text-green-600 hover:text-green-800 p-2" title="Download">
-                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="table-row">
-                                    <td class="px-6 py-4 font-bold text-gray-800">Sneha Patel</td>
-                                    <td class="px-6 py-4 text-gray-600">Network Security Expert</td>
-                                    <td class="px-6 py-4">
-                                        <span class="badge badge-warning">Specialized</span>
-                                    </td>
-                                    <td class="px-6 py-4 text-gray-600">Sep 28, 2025</td>
-                                    <td class="px-6 py-4 text-gray-600 font-mono text-sm">CS-2025-001233</td>
-                                    <td class="px-6 py-4">
-                                        <div class="flex space-x-2">
-                                            <button class="text-blue-600 hover:text-blue-800 p-2" title="View">
-                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                                                </svg>
-                                            </button>
-                                            <button class="text-green-600 hover:text-green-800 p-2" title="Download">
-                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <div class="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
+                    <div class="text-center py-12">
+                        <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                        </svg>
+                        <p class="text-gray-600 text-lg">No certificates issued yet</p>
+                        <p class="text-gray-400 text-sm mt-2">Click "Issue Certificate" to create new certificates for students</p>
                     </div>
                 </div>
             </div>
@@ -573,117 +610,16 @@
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
                         </svg>
-                        <span>Upload Images</span>
+                        <span>Upload Image</span>
                     </button>
                 </div>
-
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <div class="relative group rounded-2xl overflow-hidden shadow-lg border-2 border-gray-100">
-                        <div class="h-64 gradient-blue flex items-center justify-center">
-                            <svg class="w-16 h-16 text-white opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                            </svg>
-                        </div>
-                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition flex items-center justify-center">
-                            <div class="opacity-0 group-hover:opacity-100 transition flex space-x-2">
-                                <button class="bg-white text-blue-600 p-3 rounded-lg hover:bg-blue-50 transition">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                                    </svg>
-                                </button>
-                                <button class="bg-white text-red-600 p-3 rounded-lg hover:bg-red-50 transition">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="p-4 bg-white">
-                            <p class="font-bold text-gray-800 text-sm">Lab Environment</p>
-                            <p class="text-xs text-gray-500">Uploaded: Oct 5, 2025</p>
-                        </div>
-                    </div>
-
-                    <div class="relative group rounded-2xl overflow-hidden shadow-lg border-2 border-gray-100">
-                        <div class="h-64 gradient-blue flex items-center justify-center">
-                            <svg class="w-16 h-16 text-white opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
-                            </svg>
-                        </div>
-                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition flex items-center justify-center">
-                            <div class="opacity-0 group-hover:opacity-100 transition flex space-x-2">
-                                <button class="bg-white text-blue-600 p-3 rounded-lg hover:bg-blue-50 transition">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                                    </svg>
-                                </button>
-                                <button class="bg-white text-red-600 p-3 rounded-lg hover:bg-red-50 transition">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="p-4 bg-white">
-                            <p class="font-bold text-gray-800 text-sm">Training Session</p>
-                            <p class="text-xs text-gray-500">Uploaded: Oct 4, 2025</p>
-                        </div>
-                    </div>
-
-                    <div class="relative group rounded-2xl overflow-hidden shadow-lg border-2 border-gray-100">
-                        <div class="h-64 gradient-blue flex items-center justify-center">
-                            <svg class="w-16 h-16 text-white opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
-                            </svg>
-                        </div>
-                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition flex items-center justify-center">
-                            <div class="opacity-0 group-hover:opacity-100 transition flex space-x-2">
-                                <button class="bg-white text-blue-600 p-3 rounded-lg hover:bg-blue-50 transition">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                                    </svg>
-                                </button>
-                                <button class="bg-white text-red-600 p-3 rounded-lg hover:bg-red-50 transition">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="p-4 bg-white">
-                            <p class="font-bold text-gray-800 text-sm">Campus Building</p>
-                            <p class="text-xs text-gray-500">Uploaded: Oct 3, 2025</p>
-                        </div>
-                    </div>
-
-                    <div class="relative group rounded-2xl overflow-hidden shadow-lg border-2 border-gray-100">
-                        <div class="h-64 gradient-blue flex items-center justify-center">
-                            <svg class="w-16 h-16 text-white opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
-                            </svg>
-                        </div>
-                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition flex items-center justify-center">
-                            <div class="opacity-0 group-hover:opacity-100 transition flex space-x-2">
-                                <button class="bg-white text-blue-600 p-3 rounded-lg hover:bg-blue-50 transition">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                                    </svg>
-                                </button>
-                                <button class="bg-white text-red-600 p-3 rounded-lg hover:bg-red-50 transition">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="p-4 bg-white">
-                            <p class="font-bold text-gray-800 text-sm">Certification Ceremony</p>
-                            <p class="text-xs text-gray-500">Uploaded: Oct 2, 2025</p>
-                        </div>
+                <div class="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
+                    <div class="text-center py-12">
+                        <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                        <p class="text-gray-600 text-lg">No images in gallery</p>
+                        <p class="text-gray-400 text-sm mt-2">Click "Upload Image" to add photos to the gallery</p>
                     </div>
                 </div>
             </div>
@@ -696,99 +632,40 @@
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
                         </svg>
-                        <span>Schedule Workshop</span>
+                        <span>Create Workshop</span>
                     </button>
                 </div>
-
                 <div class="grid md:grid-cols-2 gap-6">
-                    <div class="bg-white rounded-2xl shadow-lg p-6 border-2 border-gray-100">
+                    <div class="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
                         <div class="flex items-start justify-between mb-4">
-                            <div class="flex items-center space-x-4">
-                                <div class="w-16 h-16 gradient-blue rounded-xl flex items-center justify-center">
-                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h3 class="text-lg font-black text-gray-800">Advanced Penetration Testing</h3>
-                                    <p class="text-sm text-gray-500">Tomorrow, Oct 7, 2025</p>
-                                </div>
+                            <div>
+                                <h3 class="text-lg font-black text-gray-800">Advanced Penetration Testing</h3>
+                                <p class="text-sm text-gray-500 mt-1">Workshop scheduled for tomorrow</p>
                             </div>
-                            <span class="badge badge-info">Upcoming</span>
+                            <span class="badge badge-info">Tomorrow</span>
                         </div>
-                        <p class="text-gray-600 mb-4">Learn advanced techniques for penetration testing and vulnerability assessment.</p>
-                        <div class="space-y-2 mb-4">
-                            <div class="flex items-center text-sm text-gray-600">
-                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                </svg>
-                                10:00 AM - 4:00 PM
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-                                </svg>
-                                45 Registered / 50 Max
-                            </div>
+                        <div class="space-y-2 text-sm text-gray-600">
+                            <p><strong>Time:</strong> 10:00 AM - 4:00 PM</p>
+                            <p><strong>Capacity:</strong> 30 / 30 students</p>
+                            <p><strong>Instructor:</strong> John Smith</p>
                         </div>
-                        <div class="flex space-x-2">
-                            <button class="flex-1 gradient-blue text-white py-2 rounded-lg font-bold hover:opacity-90 transition">View Details</button>
-                            <button class="px-4 text-blue-600 hover:bg-blue-50 rounded-lg transition">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
-                                </svg>
-                            </button>
-                            <button class="px-4 text-red-600 hover:bg-red-50 rounded-lg transition">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                </svg>
-                            </button>
-                        </div>
+                        <button class="mt-4 w-full bg-blue-50 text-blue-600 py-2 rounded-lg font-bold hover:bg-blue-100 transition">View Details</button>
                     </div>
 
-                    <div class="bg-white rounded-2xl shadow-lg p-6 border-2 border-gray-100">
+                    <div class="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
                         <div class="flex items-start justify-between mb-4">
-                            <div class="flex items-center space-x-4">
-                                <div class="w-16 h-16 gradient-blue rounded-xl flex items-center justify-center">
-                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h3 class="text-lg font-black text-gray-800">Cloud Security Fundamentals</h3>
-                                    <p class="text-sm text-gray-500">Oct 9, 2025</p>
-                                </div>
+                            <div>
+                                <h3 class="text-lg font-black text-gray-800">Cloud Security Fundamentals</h3>
+                                <p class="text-sm text-gray-500 mt-1">Workshop scheduled in 3 days</p>
                             </div>
-                            <span class="badge badge-success">Open</span>
+                            <span class="badge badge-success">In 3 days</span>
                         </div>
-                        <p class="text-gray-600 mb-4">Master cloud security principles for AWS, Azure, and Google Cloud.</p>
-                        <div class="space-y-2 mb-4">
-                            <div class="flex items-center text-sm text-gray-600">
-                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                </svg>
-                                2:00 PM - 6:00 PM
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-                                </svg>
-                                32 Registered / 60 Max
-                            </div>
+                        <div class="space-y-2 text-sm text-gray-600">
+                            <p><strong>Time:</strong> 2:00 PM - 6:00 PM</p>
+                            <p><strong>Capacity:</strong> 25 / 40 students</p>
+                            <p><strong>Instructor:</strong> Sarah Johnson</p>
                         </div>
-                        <div class="flex space-x-2">
-                            <button class="flex-1 gradient-blue text-white py-2 rounded-lg font-bold hover:opacity-90 transition">View Details</button>
-                            <button class="px-4 text-blue-600 hover:bg-blue-50 rounded-lg transition">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
-                                </svg>
-                            </button>
-                            <button class="px-4 text-red-600 hover:bg-red-50 rounded-lg transition">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                </svg>
-                            </button>
-                        </div>
+                        <button class="mt-4 w-full bg-green-50 text-green-600 py-2 rounded-lg font-bold hover:bg-green-100 transition">View Details</button>
                     </div>
                 </div>
             </div>
@@ -797,101 +674,46 @@
             <div id="reviews" class="content-section">
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-2xl font-black text-gray-800">Manage Reviews</h2>
-                    <div class="flex space-x-2">
-                        <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-200 transition">All</button>
-                        <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-200 transition">Approved</button>
-                        <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-200 transition">Pending</button>
-                    </div>
                 </div>
-
-                <div class="space-y-4">
-                    <div class="bg-white rounded-2xl shadow-lg p-6 border-2 border-gray-100">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
                         <div class="flex items-start justify-between mb-4">
-                            <div class="flex items-start space-x-4">
-                                <div class="w-12 h-12 gradient-blue rounded-full flex items-center justify-center text-white font-bold">SK</div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-12 h-12 gradient-blue rounded-full flex items-center justify-center text-white font-bold">MJ</div>
                                 <div>
-                                    <h4 class="font-black text-gray-800">Sanjay Kumar</h4>
-                                    <p class="text-sm text-gray-500">Ethical Hacking Fundamentals</p>
-                                    <div class="flex items-center mt-1">
-                                        <div class="flex text-yellow-400">
-                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                            </svg>
-                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                            </svg>
-                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                            </svg>
-                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                            </svg>
-                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                            </svg>
-                                        </div>
-                                        <span class="text-sm text-gray-500 ml-2">5.0</span>
+                                    <p class="font-bold text-gray-800">Monica Johnson</p>
+                                    <div class="flex space-x-1 mt-1">
+                                        <span class="text-yellow-400">★</span>
+                                        <span class="text-yellow-400">★</span>
+                                        <span class="text-yellow-400">★</span>
+                                        <span class="text-yellow-400">★</span>
+                                        <span class="text-yellow-400">★</span>
                                     </div>
                                 </div>
                             </div>
-                            <span class="badge badge-success">Approved</span>
                         </div>
-                        <p class="text-gray-700 mb-3">Excellent course! The instructors are knowledgeable and the hands-on labs are very practical. I learned so much about penetration testing and network security.</p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm text-gray-500">Oct 5, 2025</span>
-                            <div class="flex space-x-2">
-                                <button class="text-red-600 hover:text-red-800 p-2">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
+                        <p class="text-gray-600 mb-4">Excellent course! The instructors are very knowledgeable and the materials are well-structured.</p>
+                        <p class="text-sm text-gray-500">For: Ethical Hacking Fundamentals</p>
                     </div>
 
-                    <div class="bg-white rounded-2xl shadow-lg p-6 border-2 border-yellow-200">
+                    <div class="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
                         <div class="flex items-start justify-between mb-4">
-                            <div class="flex items-start space-x-4">
-                                <div class="w-12 h-12 gradient-blue rounded-full flex items-center justify-center text-white font-bold">NR</div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-12 h-12 gradient-blue rounded-full flex items-center justify-center text-white font-bold">DK</div>
                                 <div>
-                                    <h4 class="font-black text-gray-800">Neha Reddy</h4>
-                                    <p class="text-sm text-gray-500">Network Security Expert</p>
-                                    <div class="flex items-center mt-1">
-                                        <div class="flex text-yellow-400">
-                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                            </svg>
-                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                            </svg>
-                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                            </svg>
-                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                            </svg>
-                                            <svg class="w-4 h-4 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                            </svg>
-                                        </div>
-                                        <span class="text-sm text-gray-500 ml-2">4.0</span>
+                                    <p class="font-bold text-gray-800">David Kumar</p>
+                                    <div class="flex space-x-1 mt-1">
+                                        <span class="text-yellow-400">★</span>
+                                        <span class="text-yellow-400">★</span>
+                                        <span class="text-yellow-400">★</span>
+                                        <span class="text-yellow-400">★</span>
+                                        <span class="text-gray-300">★</span>
                                     </div>
                                 </div>
                             </div>
-                            <span class="badge badge-warning">Pending</span>
                         </div>
-                        <p class="text-gray-700 mb-3">Great content overall. The course covers all essential topics in network security. Would love to see more real-world case studies included.</p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm text-gray-500">Oct 4, 2025</span>
-                            <div class="flex space-x-2">
-                                <button class="gradient-blue text-white px-4 py-2 rounded-lg font-semibold hover:opacity-90 transition">Approve</button>
-                                <button class="text-red-600 hover:text-red-800 p-2">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
+                        <p class="text-gray-600 mb-4">Great content and practical exercises. Could use more hands-on labs for better practice.</p>
+                        <p class="text-sm text-gray-500">For: Network Security Expert</p>
                     </div>
                 </div>
             </div>
@@ -900,198 +722,154 @@
             <div id="contacts" class="content-section">
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-2xl font-black text-gray-800">Contact Messages</h2>
-                    <div class="flex space-x-2">
-                        <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-200 transition">All</button>
-                        <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-200 transition">Unread</button>
-                        <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-200 transition">Read</button>
-                    </div>
                 </div>
-
                 <div class="bg-white rounded-2xl shadow-lg overflow-hidden border-2 border-gray-100">
-                    <div class="divide-y divide-gray-200">
-                        <div class="p-6 hover:bg-gray-50 transition cursor-pointer border-l-4 border-blue-600">
-                            <div class="flex items-start justify-between mb-2">
-                                <div>
-                                    <h4 class="font-black text-gray-800">Vikram Singh</h4>
-                                    <p class="text-sm text-gray-500">vikram.singh@email.com • +91 98765 12345</p>
-                                </div>
-                                <div class="flex items-center space-x-2">
-                                    <span class="badge badge-info">Unread</span>
-                                    <span class="text-sm text-gray-500">2 hours ago</span>
-                                </div>
-                            </div>
-                            <p class="text-gray-700 mb-3">I'm interested in enrolling in the Ethical Hacking Fundamentals course. Could you please provide more details about the course schedule and payment options?</p>
-                            <div class="flex space-x-2">
-                                <button class="gradient-blue text-white px-4 py-2 rounded-lg font-semibold hover:opacity-90 transition text-sm">Reply</button>
-                                <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-200 transition text-sm">Mark as Read</button>
-                                <button class="text-red-600 hover:text-red-800 p-2">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="p-6 hover:bg-gray-50 transition cursor-pointer">
-                            <div class="flex items-start justify-between mb-2">
-                                <div>
-                                    <h4 class="font-black text-gray-800 text-gray-500">Priya Desai</h4>
-                                    <p class="text-sm text-gray-500">priya.desai@email.com • +91 87654 32109</p>
-                                </div>
-                                <div class="flex items-center space-x-2">
-                                    <span class="badge badge-success">Read</span>
-                                    <span class="text-sm text-gray-500">1 day ago</span>
-                                </div>
-                            </div>
-                            <p class="text-gray-600 mb-3">Thank you for the information about the workshops. I've successfully registered for the Cloud Security Fundamentals workshop.</p>
-                            <div class="flex space-x-2">
-                                <button class="gradient-blue text-white px-4 py-2 rounded-lg font-semibold hover:opacity-90 transition text-sm">Reply</button>
-                                <button class="text-red-600 hover:text-red-800 p-2">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="p-6 hover:bg-gray-50 transition cursor-pointer border-l-4 border-blue-600">
-                            <div class="flex items-start justify-between mb-2">
-                                <div>
-                                    <h4 class="font-black text-gray-800">Aditya Sharma</h4>
-                                    <p class="text-sm text-gray-500">aditya.sharma@email.com • +91 90123 45678</p>
-                                </div>
-                                <div class="flex items-center space-x-2">
-                                    <span class="badge badge-info">Unread</span>
-                                    <span class="text-sm text-gray-500">3 hours ago</span>
-                                </div>
-                            </div>
-                            <p class="text-gray-700 mb-3">Can you provide information about job placement assistance after course completion? I'm particularly interested in the Application Security Pro course.</p>
-                            <div class="flex space-x-2">
-                                <button class="gradient-blue text-white px-4 py-2 rounded-lg font-semibold hover:opacity-90 transition text-sm">Reply</button>
-                                <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-200 transition text-sm">Mark as Read</button>
-                                <button class="text-red-600 hover:text-red-800 p-2">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50 border-b-2 border-gray-200">
+                                <tr>
+                                    <th class="px-6 py-4 text-left text-xs font-black text-gray-600 uppercase tracking-wider">Name</th>
+                                    <th class="px-6 py-4 text-left text-xs font-black text-gray-600 uppercase tracking-wider">Email</th>
+                                    <th class="px-6 py-4 text-left text-xs font-black text-gray-600 uppercase tracking-wider">Subject</th>
+                                    <th class="px-6 py-4 text-left text-xs font-black text-gray-600 uppercase tracking-wider">Date</th>
+                                    <th class="px-6 py-4 text-left text-xs font-black text-gray-600 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-4 text-left text-xs font-black text-gray-600 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr class="table-row">
+                                    <td class="px-6 py-4 font-bold text-gray-800">Raj Patel</td>
+                                    <td class="px-6 py-4 text-gray-600">raj@email.com</td>
+                                    <td class="px-6 py-4 text-gray-600">Course Inquiry</td>
+                                    <td class="px-6 py-4 text-gray-600">Oct 12, 2025</td>
+                                    <td class="px-6 py-4">
+                                        <span class="badge badge-warning">Pending</span>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <button class="text-blue-600 hover:text-blue-800 p-2">View</button>
+                                    </td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td class="px-6 py-4 font-bold text-gray-800">Priya Singh</td>
+                                    <td class="px-6 py-4 text-gray-600">priya@email.com</td>
+                                    <td class="px-6 py-4 text-gray-600">Certificate Request</td>
+                                    <td class="px-6 py-4 text-gray-600">Oct 11, 2025</td>
+                                    <td class="px-6 py-4">
+                                        <span class="badge badge-success">Resolved</span>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <button class="text-blue-600 hover:text-blue-800 p-2">View</button>
+                                    </td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td class="px-6 py-4 font-bold text-gray-800">Amit Verma</td>
+                                    <td class="px-6 py-4 text-gray-600">amit@email.com</td>
+                                    <td class="px-6 py-4 text-gray-600">Technical Issue</td>
+                                    <td class="px-6 py-4 text-gray-600">Oct 10, 2025</td>
+                                    <td class="px-6 py-4">
+                                        <span class="badge badge-info">In Progress</span>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <button class="text-blue-600 hover:text-blue-800 p-2">View</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
 
             <!-- Settings Section -->
             <div id="settings" class="content-section">
-                <h2 class="text-2xl font-black text-gray-800 mb-6">Settings</h2>
-                
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-black text-gray-800">Settings</h2>
+                </div>
+
                 <div class="grid lg:grid-cols-2 gap-6">
-                    <div class="bg-white rounded-2xl shadow-lg p-6 border-2 border-gray-100">
+                    <!-- General Settings -->
+                    <div class="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
                         <h3 class="text-xl font-black text-gray-800 mb-6">General Settings</h3>
                         <div class="space-y-4">
                             <div>
-                                <label class="block text-gray-700 font-bold mb-2">Institute Name</label>
-                                <input type="text" value="CyberShield Institute" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition">
+                                <label class="block text-sm font-bold text-gray-700 mb-2">Platform Name</label>
+                                <input type="text" value="CyberShield Academy" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600">
                             </div>
                             <div>
-                                <label class="block text-gray-700 font-bold mb-2">Email Address</label>
-                                <input type="email" value="info@cybershield.edu" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition">
+                                <label class="block text-sm font-bold text-gray-700 mb-2">Support Email</label>
+                                <input type="email" value="support@cybershield.com" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600">
                             </div>
                             <div>
-                                <label class="block text-gray-700 font-bold mb-2">Phone Number</label>
-                                <input type="tel" value="+91 98765 43210" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition">
+                                <label class="block text-sm font-bold text-gray-700 mb-2">Phone Number</label>
+                                <input type="tel" value="+1 (555) 123-4567" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600">
                             </div>
-                            <div>
-                                <label class="block text-gray-700 font-bold mb-2">Address</label>
-                                <textarea rows="3" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition">123 Cyber Street, Tech Park, Aurangabad, Maharashtra 431001, India</textarea>
-                            </div>
-                            <button class="gradient-blue text-white px-6 py-3 rounded-xl font-bold hover:opacity-90 transition w-full">Save Changes</button>
+                            <button class="w-full gradient-blue text-white py-2 rounded-lg font-bold hover:opacity-90 transition">Save Changes</button>
                         </div>
                     </div>
 
-                    <div class="bg-white rounded-2xl shadow-lg p-6 border-2 border-gray-100">
-                        <h3 class="text-xl font-black text-gray-800 mb-6">Social Media Links</h3>
-                        <div class="space-y-4">
-                            <div>
-                                <label class="block text-gray-700 font-bold mb-2">Facebook</label>
-                                <input type="url" placeholder="https://facebook.com/cybershield" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition">
-                            </div>
-                            <div>
-                                <label class="block text-gray-700 font-bold mb-2">Twitter</label>
-                                <input type="url" placeholder="https://twitter.com/cybershield" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition">
-                            </div>
-                            <div>
-                                <label class="block text-gray-700 font-bold mb-2">LinkedIn</label>
-                                <input type="url" placeholder="https://linkedin.com/company/cybershield" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition">
-                            </div>
-                            <div>
-                                <label class="block text-gray-700 font-bold mb-2">Instagram</label>
-                                <input type="url" placeholder="https://instagram.com/cybershield" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition">
-                            </div>
-                            <button class="gradient-blue text-white px-6 py-3 rounded-xl font-bold hover:opacity-90 transition w-full">Update Links</button>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-2xl shadow-lg p-6 border-2 border-gray-100">
+                    <!-- Security Settings -->
+                    <div class="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
                         <h3 class="text-xl font-black text-gray-800 mb-6">Security Settings</h3>
                         <div class="space-y-4">
-                            <div>
-                                <label class="block text-gray-700 font-bold mb-2">Current Password</label>
-                                <input type="password" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition">
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                <div>
+                                    <p class="font-bold text-gray-800">Two-Factor Authentication</p>
+                                    <p class="text-sm text-gray-500">Add extra security to your account</p>
+                                </div>
+                                <input type="checkbox" class="w-5 h-5 rounded">
                             </div>
-                            <div>
-                                <label class="block text-gray-700 font-bold mb-2">New Password</label>
-                                <input type="password" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition">
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                <div>
+                                    <p class="font-bold text-gray-800">Session Timeout</p>
+                                    <p class="text-sm text-gray-500">Auto-logout after 30 minutes</p>
+                                </div>
+                                <input type="checkbox" class="w-5 h-5 rounded" checked>
                             </div>
-                            <div>
-                                <label class="block text-gray-700 font-bold mb-2">Confirm New Password</label>
-                                <input type="password" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition">
-                            </div>
-                            <button class="gradient-blue text-white px-6 py-3 rounded-xl font-bold hover:opacity-90 transition w-full">Change Password</button>
+                            <button class="w-full bg-red-50 text-red-600 py-2 rounded-lg font-bold hover:bg-red-100 transition">Change Password</button>
                         </div>
                     </div>
 
-                    <div class="bg-white rounded-2xl shadow-lg p-6 border-2 border-gray-100">
-                        <h3 class="text-xl font-black text-gray-800 mb-6">Notification Preferences</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
-                                <div>
-                                    <p class="font-bold text-gray-800">Email Notifications</p>
-                                    <p class="text-sm text-gray-600">Receive email updates</p>
-                                </div>
-                                <label class="relative inline-flex items-center cursor-pointer">
-                                    <input type="checkbox" checked class="sr-only peer">
-                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                                </label>
+                    <!-- Email Notifications -->
+                    <div class="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
+                        <h3 class="text-xl font-black text-gray-800 mb-6">Email Notifications</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center space-x-3">
+                                <input type="checkbox" id="new_enrollment" class="w-4 h-4 rounded" checked>
+                                <label for="new_enrollment" class="text-gray-700">New Course Enrollments</label>
                             </div>
-                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
-                                <div>
-                                    <p class="font-bold text-gray-800">New Enrollments</p>
-                                    <p class="text-sm text-gray-600">Notify on new student enrollments</p>
-                                </div>
-                                <label class="relative inline-flex items-center cursor-pointer">
-                                    <input type="checkbox" checked class="sr-only peer">
-                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                                </label>
+                            <div class="flex items-center space-x-3">
+                                <input type="checkbox" id="new_review" class="w-4 h-4 rounded" checked>
+                                <label for="new_review" class="text-gray-700">New Reviews & Feedback</label>
                             </div>
-                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
-                                <div>
-                                    <p class="font-bold text-gray-800">Contact Messages</p>
-                                    <p class="text-sm text-gray-600">Notify on new contact submissions</p>
-                                </div>
-                                <label class="relative inline-flex items-center cursor-pointer">
-                                    <input type="checkbox" checked class="sr-only peer">
-                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                                </label>
+                            <div class="flex items-center space-x-3">
+                                <input type="checkbox" id="contact_msg" class="w-4 h-4 rounded" checked>
+                                <label for="contact_msg" class="text-gray-700">New Contact Messages</label>
                             </div>
-                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
-                                <div>
-                                    <p class="font-bold text-gray-800">New Reviews</p>
-                                    <p class="text-sm text-gray-600">Notify on new course reviews</p>
-                                </div>
-                                <label class="relative inline-flex items-center cursor-pointer">
-                                    <input type="checkbox" class="sr-only peer">
-                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                                </label>
+                            <div class="flex items-center space-x-3">
+                                <input type="checkbox" id="system_alerts" class="w-4 h-4 rounded">
+                                <label for="system_alerts" class="text-gray-700">System Alerts</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- System Information -->
+                    <div class="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
+                        <h3 class="text-xl font-black text-gray-800 mb-6">System Information</h3>
+                        <div class="space-y-4 text-sm">
+                            <div class="flex justify-between pb-2 border-b border-gray-200">
+                                <span class="text-gray-600">Platform Version:</span>
+                                <span class="font-bold text-gray-800">2.1.0</span>
+                            </div>
+                            <div class="flex justify-between pb-2 border-b border-gray-200">
+                                <span class="text-gray-600">Last Updated:</span>
+                                <span class="font-bold text-gray-800">Oct 5, 2025</span>
+                            </div>
+                            <div class="flex justify-between pb-2 border-b border-gray-200">
+                                <span class="text-gray-600">Database Status:</span>
+                                <span class="font-bold text-green-600">Connected</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Server Status:</span>
+                                <span class="font-bold text-green-600">Online</span>
                             </div>
                         </div>
                     </div>
@@ -1109,7 +887,6 @@
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const sidebarClose = document.getElementById('sidebarClose');
 
-        // Section titles mapping
         const sectionTitles = {
             'dashboard': 'Dashboard',
             'courses': 'Manage Courses',
@@ -1122,26 +899,17 @@
             'settings': 'Settings'
         };
 
-        // Handle sidebar link clicks
         sidebarLinks.forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
-                
-                // Get section name
                 const sectionName = this.getAttribute('data-section');
                 
-                // Remove active class from all links
+                // Update active state on sidebar links
                 sidebarLinks.forEach(l => l.classList.remove('active'));
-                
-                // Add active class to clicked link
                 this.classList.add('active');
                 
-                // Hide all content sections
-                contentSections.forEach(section => {
-                    section.classList.remove('active');
-                });
-                
-                // Show selected content section
+                // Show corresponding content section
+                contentSections.forEach(section => section.classList.remove('active'));
                 const targetSection = document.getElementById(sectionName);
                 if (targetSection) {
                     targetSection.classList.add('active');
@@ -1150,7 +918,7 @@
                 // Update page title
                 pageTitle.textContent = sectionTitles[sectionName] || 'Dashboard';
                 
-                // Close sidebar on mobile
+                // Close mobile sidebar if open
                 if (window.innerWidth < 1024) {
                     sidebar.classList.remove('open');
                 }
@@ -1164,13 +932,14 @@
             });
         }
 
+        // Close sidebar button
         if (sidebarClose) {
             sidebarClose.addEventListener('click', function() {
                 sidebar.classList.remove('open');
             });
         }
 
-        // Close sidebar when clicking outside on mobile
+        // Close sidebar when clicking outside
         document.addEventListener('click', function(event) {
             if (window.innerWidth < 1024) {
                 if (!sidebar.contains(event.target) && !mobileMenuBtn?.contains(event.target)) {
@@ -1179,80 +948,17 @@
             }
         });
 
-        // Prevent closing when clicking inside sidebar
+        // Prevent sidebar from closing when clicking inside it
         sidebar.addEventListener('click', function(event) {
             event.stopPropagation();
         });
 
-        // Handle window resize
+        // Close sidebar on window resize
         window.addEventListener('resize', function() {
             if (window.innerWidth >= 1024) {
                 sidebar.classList.remove('open');
             }
         });
-
-        // Sample alert for button clicks
-        document.querySelectorAll('button').forEach(button => {
-            if (!button.hasAttribute('data-section') && 
-                button.id !== 'mobileMenuBtn' && 
-                button.id !== 'sidebarClose' &&
-                !button.closest('.sidebar-link')) {
-                button.addEventListener('click', function(e) {
-                    const buttonText = this.textContent.trim() || this.title || 'Action';
-                    if (buttonText && !['', 'Logout'].includes(buttonText)) {
-                        console.log(`Button clicked: ${buttonText}`);
-                    }
-                });
-            }
-        });
-
-        // Initialize tooltips for action buttons
-        document.querySelectorAll('[title]').forEach(element => {
-            element.style.position = 'relative';
-        });
-
-        // Smooth scroll behavior
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Add loading state for forms
-        document.querySelectorAll('form').forEach(form => {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const submitBtn = this.querySelector('button[type="submit"]');
-                if (submitBtn) {
-                    const originalText = submitBtn.textContent;
-                    submitBtn.textContent = 'Saving...';
-                    submitBtn.disabled = true;
-                    
-                    setTimeout(() => {
-                        submitBtn.textContent = originalText;
-                        submitBtn.disabled = false;
-                        alert('Changes saved successfully!');
-                    }, 1500);
-                }
-            });
-        });
-
-        // Auto-hide alerts/notifications
-        setTimeout(() => {
-            const alerts = document.querySelectorAll('.alert');
-            alerts.forEach(alert => {
-                alert.style.transition = 'opacity 0.5s';
-                alert.style.opacity = '0';
-                setTimeout(() => alert.remove(), 500);
-            });
-        }, 5000);
     </script>
 </body>
 </html>

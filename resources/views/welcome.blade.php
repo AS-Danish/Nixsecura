@@ -717,7 +717,7 @@
                 <div>
                     <h4 class="text-xl font-black mb-6">Quick Links</h4>
                     <ul class="space-y-3">
-                        <li><a href="#home" class="text-gray-400 hover:text-blue-400 transition">Home</a></li>
+                        <li><a href="#home" class="text-gray-400 hover:text-blue-400 transition">Dashboard</a></li>
                         <li><a href="#courses" class="text-gray-400 hover:text-blue-400 transition">Courses</a></li>
                         <li><a href="#certificates" class="text-gray-400 hover:text-blue-400 transition">Certificates</a></li>
                         <li><a href="#blogs" class="text-gray-400 hover:text-blue-400 transition">Blog</a></li>
