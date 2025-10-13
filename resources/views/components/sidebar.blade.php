@@ -20,7 +20,7 @@
 
         <!-- Navigation Menu -->
         <nav class="flex-1 overflow-y-auto px-4 py-6 space-y-2">
-            <a href="#" class="sidebar-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" data-section="dashboard" title="Dashboard">
+            <a href="{{ route('dashboard') }}" class="sidebar-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" data-section="dashboard" title="Dashboard">
                 <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
                 </svg>
@@ -84,6 +84,17 @@
                     </svg>
                     <span class="sidebar-text whitespace-nowrap">Settings</span>
                 </a>
+
+                <!-- Logout Form -->
+                <form method="POST" action="{{ route('logout') }}" id="logoutForm" class="mt-2">
+                    @csrf
+                    <button type="submit" class="sidebar-link w-full text-left" title="Logout" onclick="return confirmLogout(event)">
+                        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                        </svg>
+                        <span class="sidebar-text whitespace-nowrap">Logout</span>
+                    </button>
+                </form>
             </div>
         </nav>
 
@@ -138,6 +149,10 @@
         transition: all 0.3s;
         gap: 0.75rem;
         position: relative;
+        text-decoration: none;
+        border: none;
+        background: none;
+        cursor: pointer;
     }
 
     .sidebar-link:hover {
@@ -223,6 +238,13 @@
 </style>
 
 <script>
+    // Confirm logout function
+    function confirmLogout(event) {
+        // You can add a confirmation dialog if needed
+        // return confirm('Are you sure you want to logout?');
+        return true; // Allow form submission
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
         const sidebar = document.getElementById('sidebar');
         const sidebarToggle = document.getElementById('sidebarToggle');

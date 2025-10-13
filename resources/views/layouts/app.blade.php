@@ -25,9 +25,10 @@
                 padding: 0;
             }
 
-            /* Remove any default margins on main content */
+            /* Main content margin adjustments */
             #mainContent {
                 margin-left: 256px;
+                transition: margin-left 0.3s;
             }
 
             #mainContent.sidebar-collapsed {
@@ -141,10 +142,15 @@
         <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
         
         <script>
-            // Adjust main content margin when sidebar is collapsed
+            // Wait for DOM to be fully loaded
             document.addEventListener('DOMContentLoaded', function() {
                 const sidebar = document.getElementById('sidebar');
                 const mainContent = document.getElementById('mainContent');
+                
+                if (!sidebar || !mainContent) {
+                    console.error('Sidebar or mainContent element not found');
+                    return;
+                }
                 
                 // Observe sidebar class changes
                 const observer = new MutationObserver(function(mutations) {
@@ -161,13 +167,20 @@
                     });
                 });
                 
-                if (sidebar) {
-                    observer.observe(sidebar, { attributes: true });
-                    
-                    // Set initial state
-                    if (window.innerWidth >= 1024 && sidebar.classList.contains('sidebar-collapsed')) {
-                        mainContent.classList.add('sidebar-collapsed');
-                    }
+                observer.observe(sidebar, { attributes: true });
+                
+                // Set initial state
+                if (window.innerWidth >= 1024 && sidebar.classList.contains('sidebar-collapsed')) {
+                    mainContent.classList.add('sidebar-collapsed');
+                }
+                
+                // Handle mobile menu button
+                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        sidebar.classList.toggle('sidebar-open');
+                    });
                 }
             });
         </script>
