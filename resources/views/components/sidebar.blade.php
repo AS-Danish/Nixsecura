@@ -3,23 +3,23 @@
     <div class="flex flex-col h-full">
         <!-- Logo Section -->
         <div class="flex items-center justify-between px-6 py-6 border-b border-blue-700">
-            <div class="flex items-center space-x-3 sidebar-content">
+            <div class="flex items-center space-x-3 sidebar-content overflow-hidden">
                 <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center flex-shrink-0">
                     <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
                     </svg>
                 </div>
-                <span class="text-xl font-black whitespace-nowrap">CyberShield</span>
+                <span class="text-xl font-black whitespace-nowrap sidebar-text">CyberShield</span>
             </div>
             <button id="sidebarToggle" class="text-white hover:bg-blue-700 p-2 rounded-lg transition flex-shrink-0" title="Toggle Sidebar">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/>
                 </svg>
             </button>
         </div>
 
         <!-- Navigation Menu -->
-        <nav class="flex-1 overflow-y-auto px-4 py-6 space-y-2">
+        <nav class="flex-1 overflow-y-auto px-4 py-6 space-y-2 custom-scrollbar">
             <a href="{{ route('dashboard') }}" class="sidebar-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" data-section="dashboard" title="Dashboard">
                 <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
@@ -100,11 +100,11 @@
 
         <!-- User Profile Section -->
         <div class="px-4 py-4 border-t border-blue-700">
-            <div class="flex items-center space-x-3 p-3 bg-blue-700 bg-opacity-50 rounded-xl hover:bg-opacity-70 transition">
+            <div class="flex items-center space-x-3 p-3 bg-blue-700 bg-opacity-50 rounded-xl hover:bg-opacity-70 transition sidebar-profile">
                 <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center flex-shrink-0">
                     <span class="text-blue-600 font-bold text-sm">{{ strtoupper(substr(Auth::user()->name ?? 'A', 0, 1)) }}</span>
                 </div>
-                <div class="flex-1 min-w-0 sidebar-content">
+                <div class="flex-1 min-w-0 sidebar-text overflow-hidden">
                     <p class="text-sm font-bold truncate">{{ Auth::user()->name ?? 'Admin' }}</p>
                     <p class="text-xs text-blue-200 truncate">{{ Auth::user()->email ?? 'admin@cybershield.edu' }}</p>
                 </div>
@@ -126,12 +126,33 @@
         width: 80px;
     }
 
+    /* Hide scrollbar */
+    .custom-scrollbar {
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
+    }
+
     /* Hide text when collapsed */
-    #sidebar.sidebar-collapsed .sidebar-text,
-    #sidebar.sidebar-collapsed .sidebar-content span {
+    #sidebar.sidebar-collapsed .sidebar-text {
         opacity: 0;
         width: 0;
         overflow: hidden;
+        display: none;
+    }
+
+    /* Center icons when collapsed */
+    #sidebar.sidebar-collapsed .sidebar-link {
+        justify-content: center;
+        padding: 0.75rem;
+    }
+
+    #sidebar.sidebar-collapsed .sidebar-profile {
+        justify-content: center;
+        padding: 0.75rem;
     }
 
     #sidebar.sidebar-collapsed .sidebar-content {
@@ -197,11 +218,11 @@
     }
 
     /* Toggle button icon rotation */
-    #sidebar.sidebar-collapsed #sidebarToggle svg {
+    #sidebar.sidebar-collapsed .toggle-icon {
         transform: rotate(180deg);
     }
 
-    #sidebarToggle svg {
+    .toggle-icon {
         transition: transform 0.3s;
     }
 
@@ -216,17 +237,27 @@
             transform: translateX(0);
         }
 
-        #sidebar.sidebar-collapsed .sidebar-text,
-        #sidebar.sidebar-collapsed .sidebar-content span {
+        #sidebar.sidebar-collapsed .sidebar-text {
             opacity: 1;
             width: auto;
+            display: block;
+        }
+
+        #sidebar.sidebar-collapsed .sidebar-link {
+            justify-content: flex-start;
+            padding: 0.75rem 1rem;
+        }
+
+        #sidebar.sidebar-collapsed .sidebar-profile {
+            justify-content: flex-start;
+            padding: 0.75rem;
         }
 
         #sidebar.sidebar-open ~ #sidebarOverlay {
             display: block;
         }
 
-        #sidebar.sidebar-collapsed #sidebarToggle svg {
+        #sidebar.sidebar-collapsed .toggle-icon {
             transform: none;
         }
 
