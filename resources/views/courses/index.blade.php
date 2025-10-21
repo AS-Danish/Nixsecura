@@ -20,7 +20,7 @@
             </div>
             <button 
                 onclick="openAddCourseModal()" 
-                class="group relative bg-gradient-to-br from-blue-600 to-blue-800  text-white font-bold py-3.5 md:py-4 px-8 md:px-10 rounded-2xl transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 flex items-center gap-3 overflow-hidden text-sm md:text-base"
+                class="group relative bg-gradient-to-br from-blue-600 to-blue-800 text-white font-bold py-3.5 md:py-4 px-8 md:px-10 rounded-2xl transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 flex items-center gap-3 overflow-hidden text-sm md:text-base"
             >
                 <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                 <svg class="w-5 h-5 md:w-6 md:h-6 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -31,8 +31,12 @@
         </div>
 
         <!-- Courses Grid -->
-        <div class="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div class="relative">
             @forelse($courses as $course)
+                @if($loop->first)
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                @endif
+                
                 @php
                     $gradients = [
                         ['from' => 'from-blue-500', 'to' => 'to-cyan-400', 'icon' => 'text-blue-600', 'badge' => 'bg-blue-100 text-blue-700'],
@@ -44,6 +48,7 @@
                     $colorIndex = $loop->index % count($gradients);
                     $gradient = $gradients[$colorIndex];
                 @endphp
+                
                 <div class="group bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg border border-white/60 hover:shadow-2xl transition-all duration-500 overflow-hidden hover:-translate-y-2">
                     <!-- Course Image with Overlay -->
                     <div class="relative h-48 bg-gradient-to-br {{ $gradient['from'] }} {{ $gradient['to'] }} overflow-hidden">
@@ -121,7 +126,7 @@
 
                         <div class="flex gap-3">
                             <a href="{{ route('courses.edit', $course->id) }}" 
-                               class="flex-1 group/btn bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 shadow-md hover:shadow-xl hover:scale-105 flex items-center justify-center gap-2"
+                               class="flex-1 group/btn bg-gradient-to-br from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 shadow-md hover:shadow-xl hover:scale-105 flex items-center justify-center gap-2"
                             >
                                 <svg class="w-4 h-4 group-hover/btn:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
@@ -132,7 +137,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" 
-                                        class="w-full group/btn bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 shadow-md hover:shadow-xl hover:scale-105 flex items-center justify-center gap-2"
+                                        class="w-full group/btn bg-gradient-to-br from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 shadow-md hover:shadow-xl hover:scale-105 flex items-center justify-center gap-2"
                                 >
                                     <svg class="w-4 h-4 group-hover/btn:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
@@ -143,21 +148,26 @@
                         </div>
                     </div>
                 </div>
+                
+                @if($loop->last)
+                    </div>
+                @endif
             @empty
-                <div class="col-span-full fixed inset-0 flex items-center justify-center pointer-events-none">
-                    <div class="text-center space-y-6 pointer-events-auto">
+                <div class="flex items-center justify-center py-20">
+                    <div class="text-center space-y-6">
                         <div class="space-y-2">
                             <p class="text-slate-900 text-2xl font-black">No courses yet</p>
                             <p class="text-slate-500 text-base">Start by creating your first course</p>
                         </div>
                         <button 
                             onclick="openAddCourseModal()"
-                            class="inline-flex items-center gap-3 bg-gradient-to-br from-blue-600 to-blue-800 text-white font-bold py-4 px-8 rounded-2xl transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105"
+                            class="group inline-flex items-center gap-3 bg-gradient-to-br from-blue-600 to-blue-800 text-white font-bold py-4 px-8 rounded-2xl transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 overflow-hidden relative"
                         >
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                            <svg class="w-5 h-5 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/>
                             </svg>
-                            <span>Create Your First Course</span>
+                            <span class="relative z-10">Create Your First Course</span>
                         </button>
                     </div>
                 </div>
@@ -166,7 +176,6 @@
     </div>
 
     <!-- Add Course Modal -->
-    <!-- Modal -->
     <div id="addCourseModal" 
          class="hidden fixed inset-0 z-50 overflow-hidden"
          onclick="if(event.target === this) closeAddCourseModal()"
@@ -182,19 +191,15 @@
                 <div class="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-5 rounded-t-xl">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
-                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-                                </svg>
-                            </div>
+                        
                             <div>
-                                <h2 class="text-xl font-bold ">Create New Course</h2>
+                                <h2 class="text-xl font-bold">Create New Course</h2>
                                 <p class="text-blue-800 text-xs">Fill in the details to add a new course</p>
                             </div>
                         </div>
                         <button 
                             onclick="closeAddCourseModal()" 
-                            class=" p-2"
+                            class="hover:bg-white/10 p-2 rounded-lg transition-colors"
                         >
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
@@ -389,14 +394,14 @@
                     <button 
                         type="button" 
                         onclick="closeAddCourseModal()" 
-                        class="flex-1 bg-white hover:bg-gray-100 text-gray-700 font-semibold py-3.5 px-6 rounded-lg border border-gray-300 text-base"
+                        class="flex-1 bg-white hover:bg-gray-100 text-gray-700 font-semibold py-3.5 px-6 rounded-lg border border-gray-300 text-base transition-all"
                     >
                         Cancel
                     </button>
                     <button 
                         type="submit" 
                         form="courseForm" 
-                        class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 px-6 rounded-lg flex items-center justify-center gap-2 text-base" 
+                        class="flex-1 bg-gradient-to-br from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white font-semibold py-3.5 px-6 rounded-lg flex items-center justify-center gap-2 text-base shadow-lg hover:shadow-xl transition-all" 
                         id="submitBtn"
                     >
                         <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
