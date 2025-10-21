@@ -3,26 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
 
 class CourseController extends Controller
 {
     public function index(): View
     {
-        // Get real courses from database
-        $courses = Course::all();
-        
-        // If no courses exist, create sample data for UI testing
-        if ($courses->isEmpty()) {
-            $courses = collect([
-                (object)['id' => 1, 'name' => 'Ethical Hacking Fundamentals', 'description' => 'Learn the basics of ethical hacking and penetration testing from industry experts.', 'duration' => 6, 'fees' => 5999, 'modules' => 12],
-                (object)['id' => 2, 'name' => 'Network Security Expert', 'description' => 'Master network security concepts, firewalls, and advanced protection strategies.', 'duration' => 8, 'fees' => 7999, 'modules' => 15],
-                (object)['id' => 3, 'name' => 'Application Security Pro', 'description' => 'Deep dive into secure coding practices and application vulnerability testing.', 'duration' => 10, 'fees' => 9999, 'modules' => 18],
-                (object)['id' => 4, 'name' => 'Cloud Security Fundamentals', 'description' => 'Secure your cloud infrastructure with industry best practices and compliance standards.', 'duration' => 7, 'fees' => 6999, 'modules' => 14],
-                (object)['id' => 5, 'name' => 'Web Application Security', 'description' => 'Master OWASP top 10 vulnerabilities and secure web development practices.', 'duration' => 9, 'fees' => 8499, 'modules' => 16],
-            ]);
-        }
-        
+        $courses = Course::latest()->get();
         return view('courses.index', compact('courses'));
     }
 
@@ -31,9 +20,29 @@ class CourseController extends Controller
         return view('courses.create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        // Add course creation logic
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'duration' => 'required|integer|min:1',
+            'fees' => 'required|numeric|min:0',
+            'modules' => 'required|integer|min:1',
+            'contents' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048' // 2MB max
+        ]);
+
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('uploads/courses'), $imageName);
+            $validated['image'] = 'uploads/courses/' . $imageName;
+        }
+
+        Course::create($validated);
+
+        return response()->json(['success' => true, 'message' => 'Course created successfully']);
     }
 
     public function edit(Course $course): View
@@ -41,13 +50,45 @@ class CourseController extends Controller
         return view('courses.edit', compact('course'));
     }
 
-    public function update(Course $course)
+    public function update(Request $request, Course $course)
     {
-        // Add course update logic
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'duration' => 'required|integer|min:1',
+            'fees' => 'required|numeric|min:0',
+            'modules' => 'required|integer|min:1',
+            'contents' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            // Delete old image if exists
+            if ($course->image && file_exists(public_path($course->image))) {
+                unlink(public_path($course->image));
+            }
+
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('uploads/courses'), $imageName);
+            $validated['image'] = 'uploads/courses/' . $imageName;
+        }
+
+        $course->update($validated);
+
+        return response()->json(['success' => true, 'message' => 'Course updated successfully']);
     }
 
     public function destroy(Course $course)
     {
-        // Add course delete logic
+        // Delete image if exists
+        if ($course->image && file_exists(public_path($course->image))) {
+            unlink(public_path($course->image));
+        }
+
+        $course->delete();
+
+        return redirect()->route('courses.index')->with('success', 'Course deleted successfully');
     }
 }
