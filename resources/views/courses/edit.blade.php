@@ -1,4 +1,5 @@
 <x-app-layout>
+    
     <x-slot name="page-title">Edit Course</x-slot>
 
     <div class="p-4 md:p-8 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 min-h-screen">
