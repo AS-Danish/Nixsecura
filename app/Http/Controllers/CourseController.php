@@ -47,11 +47,19 @@ class CourseController extends Controller
 
     public function edit(Course $course): View
     {
+        // Check if user is logged in and is admin
+        if (!auth()->check() || auth()->user()->is_admin != 1) {
+            abort(403, 'Unauthorized action.');
+        }
         return view('courses.edit', compact('course'));
     }
 
     public function update(Request $request, Course $course)
     {
+        // Check if user is logged in and is admin
+        if (!auth()->check() || auth()->user()->is_admin != 1) {
+            abort(403, 'Unauthorized action.');
+        }
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
@@ -82,6 +90,7 @@ class CourseController extends Controller
 
     public function destroy(Course $course)
     {
+        $this->authorize('delete', $course);
         // Delete image if exists
         if ($course->image && file_exists(public_path($course->image))) {
             unlink(public_path($course->image));
