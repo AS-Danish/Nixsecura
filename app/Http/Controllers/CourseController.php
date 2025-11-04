@@ -60,6 +60,7 @@ class CourseController extends Controller
         if (!auth()->check() || auth()->user()->is_admin != 1) {
             abort(403, 'Unauthorized action.');
         }
+        
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
@@ -85,7 +86,9 @@ class CourseController extends Controller
 
         $course->update($validated);
 
-        return response()->json(['success' => true, 'message' => 'Course updated successfully']);
+        // Redirect to courses index instead of returning JSON
+        return redirect()->route('courses.index')
+                         ->with('success', 'Course updated successfully!');
     }
 
     public function destroy(Course $course)
