@@ -180,8 +180,8 @@
          class="hidden fixed inset-0 z-50 overflow-hidden"
          onclick="if(event.target === this) closeAddCourseModal()"
     >
-        <!-- Backdrop -->
-        <div class="fixed inset-0 bg-black/60 transition-opacity modal-backdrop"></div>
+        <!-- Backdrop with blur and dark overlay -->
+        <div class="fixed inset-0 bg-black/70 backdrop-blur-sm transition-opacity modal-backdrop"></div>
         
         <!-- Modal Container -->
         <div class="fixed inset-0 flex items-center justify-center p-4">
@@ -436,6 +436,15 @@
         #addCourseModal.show .modal-backdrop {
             animation: fadeIn 0.3s ease-out forwards;
         }
+        
+        #addCourseModal .modal-backdrop {
+            opacity: 0;
+            transition: opacity 0.3s ease-out;
+        }
+        
+        #addCourseModal.show .modal-backdrop {
+            opacity: 1;
+        }
 
         #addCourseModal.show .modal-content {
             animation: slideUpScale 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -475,9 +484,12 @@
     <script>
         function openAddCourseModal() {
             const modal = document.getElementById('addCourseModal');
+            const mainContent = document.getElementById('courses');
             modal.classList.remove('hidden');
             setTimeout(() => modal.classList.add('show'), 10);
             document.body.style.overflow = 'hidden';
+            mainContent.style.filter = 'blur(4px)';
+            mainContent.style.transition = 'filter 0.3s ease-out';
             document.getElementById('courseForm').reset();
             document.getElementById('uploadSection').classList.remove('hidden');
             document.getElementById('imagePreview').classList.add('hidden');
@@ -486,10 +498,12 @@
 
         function closeAddCourseModal() {
             const modal = document.getElementById('addCourseModal');
+            const mainContent = document.getElementById('courses');
             modal.classList.remove('show');
             setTimeout(() => {
                 modal.classList.add('hidden');
                 document.body.style.overflow = 'auto';
+                mainContent.style.filter = 'none';
             }, 300);
             document.getElementById('errorAlert').classList.add('hidden');
         }
