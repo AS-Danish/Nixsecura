@@ -93,7 +93,10 @@ class CourseController extends Controller
 
     public function destroy(Course $course)
     {
-        $this->authorize('delete', $course);
+        // Check if user is logged in and is admin
+        if (!auth()->check() || auth()->user()->is_admin != 1) {
+            abort(403, 'Unauthorized action.');
+        }
         // Delete image if exists
         if ($course->image && file_exists(public_path($course->image))) {
             unlink(public_path($course->image));
