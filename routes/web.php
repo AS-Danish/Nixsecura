@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CertificateController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -23,6 +24,9 @@ Route::middleware('auth')->group(function () {
 
     // Blog routes
     Route::resource('blogs', BlogController::class);
+
+    // Certificate routes
+    Route::resource('certificates', CertificateController::class);
 });
 
 require __DIR__.'/auth.php';
