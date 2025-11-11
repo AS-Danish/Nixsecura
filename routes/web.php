@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CertificateController;
+use App\Http\Controllers\GalleryController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -27,6 +28,9 @@ Route::middleware('auth')->group(function () {
 
     // Certificate routes
     Route::resource('certificates', CertificateController::class);
+
+    // Gallery routes
+    Route::resource('galleries', GalleryController::class);
 });
 
 require __DIR__.'/auth.php';
