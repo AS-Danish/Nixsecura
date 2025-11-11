@@ -5,6 +5,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\WorkshopController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -31,6 +32,9 @@ Route::middleware('auth')->group(function () {
 
     // Gallery routes
     Route::resource('galleries', GalleryController::class);
+
+    // Workshop routes
+    Route::resource('workshops', WorkshopController::class);
 });
 
 require __DIR__.'/auth.php';
