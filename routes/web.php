@@ -19,6 +19,9 @@ Route::get('/', function () {
 // Public course details (read-only)
 Route::get('/courses/{course}/view', [CourseController::class, 'publicShow'])->name('courses.view');
 
+// Public all courses listing
+Route::get('/courses/all', [CourseController::class, 'publicIndex'])->name('courses.public.index');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

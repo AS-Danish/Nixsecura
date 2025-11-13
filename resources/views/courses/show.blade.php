@@ -68,7 +68,7 @@
 
                             <div class="flex items-center gap-4">
                                 <a href="#" class="gradient-blue text-white px-6 py-3 rounded-xl font-bold shadow hover:opacity-90">Enroll Now</a>
-                                <a href="{{ route('courses.index') }}" class="px-6 py-3 rounded-xl font-bold border-2 border-blue-600 text-blue-600 hover:bg-blue-50">View All Courses</a>
+                                <a href="{{ route('courses.public.index') }}" class="px-6 py-3 rounded-xl font-bold border-2 border-blue-600 text-blue-600 hover:bg-blue-50">View All Courses</a>
                             </div>
                         </div>
                     </div>

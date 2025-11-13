@@ -291,7 +291,7 @@
 
             @if(($totalCourses ?? 0) > 3)
                 <div class="mt-10 flex justify-center">
-                    <a href="{{ route('courses.index') }}" class="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg">
+                    <a href="{{ route('courses.public.index') }}" class="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg">
                         View More Courses
                     </a>
                 </div>

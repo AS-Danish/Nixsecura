@@ -20,6 +20,12 @@ class CourseController extends Controller
         return view('courses.show', compact('course'));
     }
 
+    public function publicIndex(): View
+    {
+        $courses = Course::latest()->get();
+        return view('courses.public-index', compact('courses'));
+    }
+
     public function create(): View
     {
         return view('courses.create');
