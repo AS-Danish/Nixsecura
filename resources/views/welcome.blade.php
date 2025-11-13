@@ -245,114 +245,57 @@
             </div>
             
             <div class="grid md:grid-cols-3 gap-10">
-                <!-- Course 1 -->
-                <div class="bg-white rounded-3xl overflow-hidden shadow-xl hover-scale card-shine border-2 border-gray-100">
-                    <div class="h-56 gradient-blue flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute inset-0 opacity-20">
-                            <div class="absolute top-0 left-0 w-40 h-40 bg-white rounded-full blur-2xl"></div>
-                            <div class="absolute bottom-0 right-0 w-40 h-40 bg-white rounded-full blur-2xl"></div>
-                        </div>
-                        <svg class="w-24 h-24 text-white relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-                        </svg>
-                    </div>
-                    <div class="p-8">
-                        <div class="flex items-center justify-between mb-6">
-                            <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-full text-sm font-bold">Beginner</span>
-                            <span class="text-gray-600 font-semibold flex items-center">
-                                <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                @forelse($popularCourses as $course)
+                    <div class="bg-white rounded-3xl overflow-hidden shadow-xl hover-scale card-shine border-2 border-gray-100">
+                        <div class="h-56 gradient-blue flex items-center justify-center relative overflow-hidden">
+                            @if($course->image && file_exists(public_path($course->image)))
+                                <img src="{{ asset($course->image) }}" alt="{{ $course->name }}" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent"></div>
+                            @else
+                                <div class="absolute inset-0 opacity-20">
+                                    <div class="absolute top-0 left-0 w-40 h-40 bg-white rounded-full blur-2xl"></div>
+                                    <div class="absolute bottom-0 right-0 w-40 h-40 bg-white rounded-full blur-2xl"></div>
+                                </div>
+                                <svg class="w-24 h-24 text-white relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                                 </svg>
-                                12 Weeks
-                            </span>
+                            @endif
                         </div>
-                        <h3 class="text-2xl font-black text-gray-800 mb-4">Ethical Hacking Fundamentals</h3>
-                        <p class="text-gray-600 mb-6 leading-relaxed">Master penetration testing, network security, and vulnerability assessment from scratch.</p>
-                        <div class="flex items-center justify-between mb-6">
-                            <div>
-                                <div class="text-3xl font-black gradient-text">₹12,999</div>
-                                <div class="text-sm text-gray-500">One-time payment</div>
+                        <div class="p-8">
+                            <div class="flex items-center justify-between mb-6">
+                                <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-full text-sm font-bold">{{ $course->modules ? 'Modules: '.$course->modules : 'Program' }}</span>
+                                <span class="text-gray-600 font-semibold flex items-center">
+                                    <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                    {{ $course->duration }} Weeks
+                                </span>
                             </div>
-                        </div>
-                        <button class="w-full gradient-blue text-white py-4 rounded-xl font-bold hover:opacity-90 transform hover:scale-105 transition-all shadow-lg">
-                            Enroll Now
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- Course 2 -->
-                <div class="bg-white rounded-3xl overflow-hidden shadow-xl hover-scale card-shine transform scale-105 border-2 border-blue-200">
-                    <div class="absolute top-6 right-6 z-20">
-                        <span class="bg-blue-500 text-white px-4 py-2 rounded-full text-xs font-black uppercase">Popular</span>
-                    </div>
-                    <div class="h-56 gradient-blue flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute inset-0 opacity-20">
-                            <div class="absolute top-0 left-0 w-40 h-40 bg-white rounded-full blur-2xl"></div>
-                            <div class="absolute bottom-0 right-0 w-40 h-40 bg-white rounded-full blur-2xl"></div>
-                        </div>
-                        <svg class="w-24 h-24 text-white relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
-                        </svg>
-                    </div>
-                    <div class="p-8">
-                        <div class="flex items-center justify-between mb-6">
-                            <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-full text-sm font-bold">Intermediate</span>
-                            <span class="text-gray-600 font-semibold flex items-center">
-                                <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                </svg>
-                                16 Weeks
-                            </span>
-                        </div>
-                        <h3 class="text-2xl font-black text-gray-800 mb-4">Network Security Expert</h3>
-                        <p class="text-gray-600 mb-6 leading-relaxed">Advanced firewall configuration, IDS/IPS, and enterprise-level threat detection.</p>
-                        <div class="flex items-center justify-between mb-6">
-                            <div>
-                                <div class="text-3xl font-black gradient-text">₹18,999</div>
-                                <div class="text-sm text-gray-500">One-time payment</div>
+                            <h3 class="text-2xl font-black text-gray-800 mb-4">{{ $course->name }}</h3>
+                            <p class="text-gray-600 mb-6 leading-relaxed">{{ \Illuminate\Support\Str::limit($course->description, 140) }}</p>
+                            <div class="flex items-center justify-between mb-6">
+                                <div>
+                                    <div class="text-3xl font-black gradient-text">₹{{ number_format($course->fees) }}</div>
+                                    <div class="text-sm text-gray-500">One-time payment</div>
+                                </div>
                             </div>
+                            <button class="w-full gradient-blue text-white py-4 rounded-xl font-bold hover:opacity-90 transform hover:scale-105 transition-all shadow-lg">
+                                View Details
+                            </button>
                         </div>
-                        <button class="w-full gradient-blue text-white py-4 rounded-xl font-bold hover:opacity-90 transform hover:scale-105 transition-all shadow-lg">
-                            Enroll Now
-                        </button>
                     </div>
-                </div>
-                
-                <!-- Course 3 -->
-                <div class="bg-white rounded-3xl overflow-hidden shadow-xl hover-scale card-shine border-2 border-gray-100">
-                    <div class="h-56 gradient-blue flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute inset-0 opacity-20">
-                            <div class="absolute top-0 left-0 w-40 h-40 bg-white rounded-full blur-2xl"></div>
-                            <div class="absolute bottom-0 right-0 w-40 h-40 bg-white rounded-full blur-2xl"></div>
-                        </div>
-                        <svg class="w-24 h-24 text-white relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
-                        </svg>
-                    </div>
-                    <div class="p-8">
-                        <div class="flex items-center justify-between mb-6">
-                            <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-full text-sm font-bold">Advanced</span>
-                            <span class="text-gray-600 font-semibold flex items-center">
-                                <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                </svg>
-                                20 Weeks
-                            </span>
-                        </div>
-                        <h3 class="text-2xl font-black text-gray-800 mb-4">Application Security Pro</h3>
-                        <p class="text-gray-600 mb-6 leading-relaxed">OWASP Top 10, secure coding, web/mobile app security, and DevSecOps practices.</p>
-                        <div class="flex items-center justify-between mb-6">
-                            <div>
-                                <div class="text-3xl font-black gradient-text">₹24,999</div>
-                                <div class="text-sm text-gray-500">One-time payment</div>
-                            </div>
-                        </div>
-                        <button class="w-full gradient-blue text-white py-4 rounded-xl font-bold hover:opacity-90 transform hover:scale-105 transition-all shadow-lg">
-                            Enroll Now
-                        </button>
-                    </div>
-                </div>
+                @empty
+                    <div class="md:col-span-3 text-center py-10 text-gray-600 font-semibold">No courses available yet.</div>
+                @endforelse
             </div>
+
+            @if(($totalCourses ?? 0) > 3)
+                <div class="mt-10 flex justify-center">
+                    <a href="{{ route('courses.index') }}" class="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg">
+                        View More Courses
+                    </a>
+                </div>
+            @endif
         </div>
     </section>
 

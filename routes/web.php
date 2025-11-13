@@ -7,10 +7,13 @@ use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\WorkshopController;
 use App\Http\Controllers\ReviewController;
+use App\Models\Course;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    $popularCourses = Course::latest()->take(3)->get();
+    $totalCourses = Course::count();
+    return view('welcome', compact('popularCourses', 'totalCourses'));
 });
 
 Route::get('/dashboard', function () {
