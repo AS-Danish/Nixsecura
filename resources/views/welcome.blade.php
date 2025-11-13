@@ -279,9 +279,9 @@
                                     <div class="text-sm text-gray-500">One-time payment</div>
                                 </div>
                             </div>
-                            <button class="w-full gradient-blue text-white py-4 rounded-xl font-bold hover:opacity-90 transform hover:scale-105 transition-all shadow-lg">
+                            <a href="{{ route('courses.view', $course) }}" class="w-full block text-center gradient-blue text-white py-4 rounded-xl font-bold hover:opacity-90 transform hover:scale-105 transition-all shadow-lg">
                                 View Details
-                            </button>
+                            </a>
                         </div>
                     </div>
                 @empty
