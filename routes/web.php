@@ -6,6 +6,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\WorkshopController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -35,6 +36,9 @@ Route::middleware('auth')->group(function () {
 
     // Workshop routes
     Route::resource('workshops', WorkshopController::class);
+
+    // Review routes
+    Route::resource('reviews', ReviewController::class);
 });
 
 require __DIR__.'/auth.php';
