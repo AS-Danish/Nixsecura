@@ -8,12 +8,14 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\WorkshopController;
 use App\Http\Controllers\ReviewController;
 use App\Models\Course;
+use App\Models\Certificate;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $popularCourses = Course::latest()->take(3)->get();
+    $popularCertificates = Certificate::latest()->take(3)->get();
     $totalCourses = Course::count();
-    return view('welcome', compact('popularCourses', 'totalCourses'));
+    return view('welcome', compact('popularCourses', 'popularCertificates', 'totalCourses'));
 });
 
 // Public course details (read-only)
@@ -21,6 +23,10 @@ Route::get('/courses/{course}/view', [CourseController::class, 'publicShow'])->n
 
 // Public all courses listing
 Route::get('/courses/all', [CourseController::class, 'publicIndex'])->name('courses.public.index');
+
+// Public certificates listing and details
+Route::get('/certificates/all', [CertificateController::class, 'publicIndex'])->name('certificates.public.index');
+Route::get('/certificates/{certificate}/view', [CertificateController::class, 'publicShow'])->name('certificates.view');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

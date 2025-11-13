@@ -308,75 +308,36 @@
                 <p class="text-xl text-gray-600 max-w-2xl mx-auto">Get certified and unlock new career opportunities worldwide</p>
             </div>
             
-            <div class="grid md:grid-cols-2 gap-10">
-                <div class="bg-white rounded-3xl p-10 border-2 border-blue-100 hover-scale shadow-lg">
-                    <div class="flex items-start space-x-6">
-                        <div class="w-20 h-20 gradient-blue rounded-2xl flex items-center justify-center flex-shrink-0 shadow-xl">
-                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
-                            </svg>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="text-3xl font-black text-gray-800 mb-4">CyberShield Certified Professional</h3>
-                            <p class="text-gray-600 mb-6 text-lg leading-relaxed">Comprehensive certification covering all aspects of cyber security, recognized by Fortune 500 companies.</p>
-                            <ul class="space-y-4">
-                                <li class="flex items-center text-gray-700 font-semibold">
-                                    <svg class="w-6 h-6 text-blue-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                                    </svg>
-                                    Valid for 3 years
-                                </li>
-                                <li class="flex items-center text-gray-700 font-semibold">
-                                    <svg class="w-6 h-6 text-blue-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                                    </svg>
-                                    Globally recognized credential
-                                </li>
-                                <li class="flex items-center text-gray-700 font-semibold">
-                                    <svg class="w-6 h-6 text-blue-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                                    </svg>
-                                    Digital & Physical certificate
-                                </li>
-                            </ul>
+            <div class="grid md:grid-cols-3 gap-10">
+                @forelse($popularCertificates as $certificate)
+                    <div class="bg-white rounded-3xl p-10 border-2 border-blue-100 hover-scale shadow-lg">
+                        <div class="flex items-start space-x-6">
+                            <div class="w-20 h-20 gradient-blue rounded-2xl flex items-center justify-center flex-shrink-0 shadow-xl">
+                                @if($certificate->image && file_exists(public_path($certificate->image)))
+                                    <img src="{{ asset($certificate->image) }}" alt="{{ $certificate->title }}" class="w-20 h-20 object-cover rounded-2xl border-2 border-blue-100">
+                                @else
+                                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"/></svg>
+                                @endif
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-3xl font-black text-gray-800 mb-2">{{ $certificate->title }}</h3>
+                                <p class="text-gray-600 mb-4 text-lg">{{ $certificate->organization ?? 'Certified Program' }}</p>
+                                <div class="text-gray-700 font-semibold">Issued: {{ $certificate->date->format('M d, Y') }}</div>
+                                <div class="mt-6">
+                                    <a href="{{ route('certificates.view', $certificate) }}" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-blue-600 text-white font-bold hover:bg-blue-700 shadow">View Details</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="bg-white rounded-3xl p-10 border-2 border-blue-100 hover-scale shadow-lg">
-                    <div class="flex items-start space-x-6">
-                        <div class="w-20 h-20 gradient-blue rounded-2xl flex items-center justify-center flex-shrink-0 shadow-xl">
-                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-                            </svg>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="text-3xl font-black text-gray-800 mb-4">Specialized Track Certificates</h3>
-                            <p class="text-gray-600 mb-6 text-lg leading-relaxed">Domain-specific certifications in penetration testing, network security, and application security.</p>
-                            <ul class="space-y-4">
-                                <li class="flex items-center text-gray-700 font-semibold">
-                                    <svg class="w-6 h-6 text-blue-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                                    </svg>
-                                    Multiple specialization tracks
-                                </li>
-                                <li class="flex items-center text-gray-700 font-semibold">
-                                    <svg class="w-6 h-6 text-blue-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                                    </svg>
-                                    Hands-on project completion
-                                </li>
-                                <li class="flex items-center text-gray-700 font-semibold">
-                                    <svg class="w-6 h-6 text-blue-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                                    </svg>
-                                    LinkedIn verification badge
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                @empty
+                    <div class="md:col-span-2 text-center py-10 text-gray-600 font-semibold">No certificates available yet.</div>
+                @endforelse
             </div>
+            @if(($totalCertificates ?? 0) > 3)
+                <div class="mt-10 flex justify-center">
+                    <a href="{{ route('certificates.public.index') }}" class="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg">View All Certificates</a>
+                </div>
+            @endif
         </div>
     </section>
 
@@ -818,3 +779,50 @@
     </script>
 </body>
 </html>
+
+<div class="flex items-center text-gray-700 font-semibold">
+    <svg class="w-6 h-6 text-blue-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+    </svg>
+    Multiple specialization tracks
+</div>
+<div class="flex items-center text-gray-700 font-semibold">
+    <svg class="w-6 h-6 text-blue-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+    </svg>
+    Hands-on project completion
+</div>
+<div class="flex items-center text-gray-700 font-semibold">
+    <svg class="w-6 h-6 text-blue-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+    </svg>
+    LinkedIn verification badge
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>

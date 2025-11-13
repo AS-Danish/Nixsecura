@@ -15,6 +15,17 @@ class CertificateController extends Controller
         return view('certificates.index', compact('certificates'));
     }
 
+    public function publicIndex(): View
+    {
+        $certificates = Certificate::latest()->get();
+        return view('certificates.public-index', compact('certificates'));
+    }
+
+    public function publicShow(Certificate $certificate): View
+    {
+        return view('certificates.show', compact('certificate'));
+    }
+
     public function create(): View
     {
         return view('certificates.create');
