@@ -341,82 +341,50 @@
         </div>
     </section>
 
-    <!-- Blog Section -->
+    <!-- Latest Workshops Section -->
     <section id="blogs" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-20">
                 <span class="bg-blue-100 text-blue-600 px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wide">Latest Updates</span>
-                <h2 class="text-5xl md:text-6xl font-black text-gray-800 mt-6 mb-4">Latest Insights</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Stay updated with the latest trends and best practices in cyber security</p>
+                <h2 class="text-5xl md:text-6xl font-black text-gray-800 mt-6 mb-4">Latest Workshops</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">See recent workshops with dates, location, topics and details</p>
             </div>
             
             <div class="grid md:grid-cols-3 gap-10">
-                <article class="bg-white rounded-3xl overflow-hidden shadow-xl hover-scale border-2 border-gray-100">
-                    <div class="h-56 gradient-blue relative overflow-hidden">
-                        <div class="absolute inset-0 opacity-30">
-                            <div class="absolute top-0 right-0 w-40 h-40 bg-white rounded-full blur-2xl"></div>
+                @forelse($latestWorkshops as $workshop)
+                    <article class="bg-white rounded-3xl overflow-hidden shadow-xl hover-scale border-2 border-gray-100">
+                        <div class="h-56 gradient-blue relative overflow-hidden flex items-center justify-center">
+                            @if($workshop->image && file_exists(public_path($workshop->image)))
+                                <img src="{{ asset($workshop->image) }}" alt="{{ $workshop->name }}" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent"></div>
+                            @else
+                                <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"/></svg>
+                            @endif
                         </div>
-                    </div>
-                    <div class="p-8">
-                        <div class="flex items-center space-x-3 mb-4">
-                            <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-full text-xs font-bold">Security Tips</span>
-                            <span class="text-gray-500 text-sm font-semibold">5 min read</span>
+                        <div class="p-8">
+                            <div class="flex items-center space-x-3 mb-4">
+                                <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-full text-xs font-bold">{{ $workshop->location }}</span>
+                                <span class="text-gray-500 text-sm font-semibold">{{ $workshop->start_date->format('M d, Y') }}@if($workshop->end_date) - {{ $workshop->end_date->format('M d, Y') }}@endif</span>
+                            </div>
+                            <h3 class="text-2xl font-black text-gray-800 mb-3">{{ $workshop->name }}</h3>
+                            @if(!empty($workshop->topics))
+                                <p class="text-gray-600 mb-6 leading-relaxed">{{ Str::limit($workshop->topics, 120) }}</p>
+                            @endif
+                            <a href="{{ route('workshops.view', $workshop) }}" class="text-blue-600 font-bold hover:text-blue-700 transition flex items-center">
+                                View Details
+                                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                            </a>
                         </div>
-                        <h3 class="text-2xl font-black text-gray-800 mb-4">Top 10 Cyber Security Best Practices for 2025</h3>
-                        <p class="text-gray-600 mb-6 leading-relaxed">Essential security practices every organization should implement to protect against modern threats and vulnerabilities.</p>
-                        <button class="text-blue-600 font-bold hover:text-blue-700 transition flex items-center">
-                            Read More 
-                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                            </svg>
-                        </button>
-                    </div>
-                </article>
-                
-                <article class="bg-white rounded-3xl overflow-hidden shadow-xl hover-scale border-2 border-gray-100">
-                    <div class="h-56 gradient-blue relative overflow-hidden">
-                        <div class="absolute inset-0 opacity-30">
-                            <div class="absolute top-0 right-0 w-40 h-40 bg-white rounded-full blur-2xl"></div>
-                        </div>
-                    </div>
-                    <div class="p-8">
-                        <div class="flex items-center space-x-3 mb-4">
-                            <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-full text-xs font-bold">Industry News</span>
-                            <span class="text-gray-500 text-sm font-semibold">8 min read</span>
-                        </div>
-                        <h3 class="text-2xl font-black text-gray-800 mb-4">The Rise of AI in Cyber Security Defense</h3>
-                        <p class="text-gray-600 mb-6 leading-relaxed">How artificial intelligence is transforming threat detection and response in enterprise security operations.</p>
-                        <button class="text-blue-600 font-bold hover:text-blue-700 transition flex items-center">
-                            Read More 
-                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                            </svg>
-                        </button>
-                    </div>
-                </article>
-                
-                <article class="bg-white rounded-3xl overflow-hidden shadow-xl hover-scale border-2 border-gray-100">
-                    <div class="h-56 gradient-blue relative overflow-hidden">
-                        <div class="absolute inset-0 opacity-30">
-                            <div class="absolute top-0 right-0 w-40 h-40 bg-white rounded-full blur-2xl"></div>
-                        </div>
-                    </div>
-                    <div class="p-8">
-                        <div class="flex items-center space-x-3 mb-4">
-                            <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-full text-xs font-bold">Career Guide</span>
-                            <span class="text-gray-500 text-sm font-semibold">6 min read</span>
-                        </div>
-                        <h3 class="text-2xl font-black text-gray-800 mb-4">Starting Your Career in Ethical Hacking</h3>
-                        <p class="text-gray-600 mb-6 leading-relaxed">A comprehensive guide to launching a successful career in ethical hacking and penetration testing today.</p>
-                        <button class="text-blue-600 font-bold hover:text-blue-700 transition flex items-center">
-                            Read More 
-                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                            </svg>
-                        </button>
-                    </div>
-                </article>
+                    </article>
+                @empty
+                    <div class="md:col-span-3 text-center py-10 text-gray-600 font-semibold">No workshops available yet.</div>
+                @endforelse
             </div>
+            @if(($totalWorkshops ?? 0) > 3)
+                <div class="mt-10 flex justify-center">
+                    <a href="{{ route('workshops.public.index') }}" class="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg">View All Workshops</a>
+                </div>
+            @endif
         </div>
     </section>
 
@@ -797,6 +765,123 @@
         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
     </svg>
     LinkedIn verification badge
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>

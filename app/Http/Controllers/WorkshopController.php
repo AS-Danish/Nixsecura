@@ -14,6 +14,17 @@ class WorkshopController extends Controller
         return view('workshops.index', compact('workshops'));
     }
 
+    public function publicIndex(): View
+    {
+        $workshops = Workshop::latest()->get();
+        return view('workshops.public-index', compact('workshops'));
+    }
+
+    public function publicShow(Workshop $workshop): View
+    {
+        return view('workshops.show', compact('workshop'));
+    }
+
     public function create(): View
     {
         return view('workshops.create');
