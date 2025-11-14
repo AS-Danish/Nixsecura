@@ -385,6 +385,11 @@
                     <a href="{{ route('workshops.public.index') }}" class="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg">View All Workshops</a>
                 </div>
             @endif
+        @if(($totalGalleries ?? 0) > 8)
+                <div class="mt-10 flex justify-center">
+                    <a href="{{ route('galleries.public.index') }}" class="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg">View All Photos</a>
+                </div>
+            @endif
         </div>
     </section>
 
@@ -398,71 +403,65 @@
             </div>
             
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                @php $g0 = $latestGalleries->get(0); @endphp
+                @if($g0 && $g0->image && file_exists(public_path($g0->image)))
                 <div class="relative h-80 rounded-3xl overflow-hidden group cursor-pointer transform hover:scale-105 transition-all shadow-lg">
-                    <div class="absolute inset-0 gradient-blue flex items-center justify-center">
-                        <svg class="w-20 h-20 text-white opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                        </svg>
-                    </div>
+                    <img src="{{ asset($g0->image) }}" alt="{{ $g0->title }}" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition flex items-center justify-center">
-                        <span class="text-white text-xl font-bold opacity-0 group-hover:opacity-100 transition">Lab Environment</span>
+                        <span class="text-white text-xl font-bold opacity-0 group-hover:opacity-100 transition">{{ $g0->title }}</span>
                     </div>
                 </div>
+                @endif>
                 
+                @php $g1 = $latestGalleries->get(1); @endphp
+                @if($g1 && $g1->image && file_exists(public_path($g1->image)))
                 <div class="relative h-80 rounded-3xl overflow-hidden group cursor-pointer transform hover:scale-105 transition-all shadow-lg">
-                    <div class="absolute inset-0 gradient-blue flex items-center justify-center">
-                        <svg class="w-20 h-20 text-white opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
-                        </svg>
-                    </div>
+                    <img src="{{ asset($g1->image) }}" alt="{{ $g1->title }}" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition flex items-center justify-center">
-                        <span class="text-white text-xl font-bold opacity-0 group-hover:opacity-100 transition">Training Sessions</span>
+                        <span class="text-white text-xl font-bold opacity-0 group-hover:opacity-100 transition">{{ $g1->title }}</span>
                     </div>
                 </div>
+                @endif>
                 
+                @php $g2 = $latestGalleries->get(2); @endphp
+                @if($g2 && $g2->image && file_exists(public_path($g2->image)))
                 <div class="relative h-80 rounded-3xl overflow-hidden group cursor-pointer transform hover:scale-105 transition-all shadow-lg">
-                    <div class="absolute inset-0 gradient-blue flex items-center justify-center">
-                        <svg class="w-20 h-20 text-white opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
-                        </svg>
-                    </div>
+                    <img src="{{ asset($g2->image) }}" alt="{{ $g2->title }}" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition flex items-center justify-center">
-                        <span class="text-white text-xl font-bold opacity-0 group-hover:opacity-100 transition">Modern Campus</span>
+                        <span class="text-white text-xl font-bold opacity-0 group-hover:opacity-100 transition">{{ $g2->title }}</span>
                     </div>
                 </div>
+                @endif>
                 
+                @php $g3 = $latestGalleries->get(3); @endphp
+                @if($g3 && $g3->image && file_exists(public_path($g3->image)))
                 <div class="relative h-80 rounded-3xl overflow-hidden group cursor-pointer transform hover:scale-105 transition-all shadow-lg">
-                    <div class="absolute inset-0 gradient-blue flex items-center justify-center">
-                        <svg class="w-20 h-20 text-white opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
-                        </svg>
-                    </div>
+                    <img src="{{ asset($g3->image) }}" alt="{{ $g3->title }}" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition flex items-center justify-center">
-                        <span class="text-white text-xl font-bold opacity-0 group-hover:opacity-100 transition">Certifications</span>
+                        <span class="text-white text-xl font-bold opacity-0 group-hover:opacity-100 transition">{{ $g3->title }}</span>
                     </div>
                 </div>
+                @endif>
                 
+                @php $g4 = $latestGalleries->get(4); @endphp
+                @if($g4 && $g4->image && file_exists(public_path($g4->image)))
                 <div class="relative h-80 rounded-3xl overflow-hidden group cursor-pointer transform hover:scale-105 transition-all md:col-span-2 shadow-lg">
-                    <div class="absolute inset-0 gradient-blue flex items-center justify-center">
-                        <svg class="w-24 h-24 text-white opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-                        </svg>
-                    </div>
+                    <img src="{{ asset($g4->image) }}" alt="{{ $g4->title }}" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition flex items-center justify-center">
-                        <span class="text-white text-xl font-bold opacity-0 group-hover:opacity-100 transition">Library & Resources</span>
+                        <span class="text-white text-xl font-bold opacity-0 group-hover:opacity-100 transition">{{ $g4->title }}</span>
                     </div>
                 </div>
+                @endif>
                 
+                @php $g5 = $latestGalleries->get(5); @endphp
+                @if($g5 && $g5->image && file_exists(public_path($g5->image)))
                 <div class="relative h-80 rounded-3xl overflow-hidden group cursor-pointer transform hover:scale-105 transition-all md:col-span-2 shadow-lg">
-                    <div class="absolute inset-0 gradient-blue flex items-center justify-center">
-                        <svg class="w-24 h-24 text-white opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-                        </svg>
-                    </div>
+                    <img src="{{ asset($g5->image) }}" alt="{{ $g5->title }}" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition flex items-center justify-center">
-                        <span class="text-white text-xl font-bold opacity-0 group-hover:opacity-100 transition">Student Community</span>
+                        <span class="text-white text-xl font-bold opacity-0 group-hover:opacity-100 transition">{{ $g5->title }}</span>
                     </div>
                 </div>
+                @endif>
             </div>
         </div>
     </section>
@@ -765,6 +764,210 @@
         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
     </svg>
     LinkedIn verification badge
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>

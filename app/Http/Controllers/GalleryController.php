@@ -14,6 +14,12 @@ class GalleryController extends Controller
         return view('galleries.index', compact('galleries'));
     }
 
+    public function publicIndex(): View
+    {
+        $galleries = Gallery::latest()->get();
+        return view('galleries.public-index', compact('galleries'));
+    }
+
     public function create(): View
     {
         return view('galleries.create');
