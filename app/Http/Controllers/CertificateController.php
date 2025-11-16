@@ -111,4 +111,16 @@ class CertificateController extends Controller
 
         return redirect()->route('certificates.index')->with('success', 'Certificate deleted successfully');
     }
+
+    // Add this new method to your CertificateController class
+public function publicShowJson(Certificate $certificate)
+{
+    return response()->json([
+        'id' => $certificate->id,
+        'title' => $certificate->title,
+        'organization' => $certificate->organization,
+        'date' => $certificate->date->format('Y-m-d'),
+        'image' => $certificate->image ? asset($certificate->image) : null
+    ]);
+}
 }

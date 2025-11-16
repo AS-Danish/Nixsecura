@@ -33,6 +33,8 @@ Route::get('/courses/all', [CourseController::class, 'publicIndex'])->name('cour
 // Public certificates listing and details
 Route::get('/certificates/all', [CertificateController::class, 'publicIndex'])->name('certificates.public.index');
 Route::get('/certificates/{certificate}/view', [CertificateController::class, 'publicShow'])->name('certificates.view');
+// Add this line with your other public certificate routes
+Route::get('/certificates/{certificate}/json', [CertificateController::class, 'publicShowJson'])->name('certificates.json');
 
 // Public workshops listing and details
 Route::get('/workshops/all', [WorkshopController::class, 'publicIndex'])->name('workshops.public.index');
